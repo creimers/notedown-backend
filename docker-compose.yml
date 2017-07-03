@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  couchdb: 
+    image: couchdb:latest
+
+    build:
+      context: .
+
+    env_file: .env
+
+    ports:
+      - "5984:5984"
+
+  # django:
+    # image: python:3.6
