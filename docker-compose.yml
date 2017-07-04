@@ -3,6 +3,7 @@ version: "3"
 services:
   couchdb: 
     image: couchdb:latest
+    # image:  klaemo/couchdb:latest
 
     build:
       context: .
