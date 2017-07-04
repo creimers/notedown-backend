@@ -1,0 +1,30 @@
+{
+  "name": "notedown-backend",
+  "version": "1.0.0",
+  "description": "* couchdb",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": "git+https://github.com/creimers/notedown-backend.git",
+  "author": "Christoph Reimers <christoph@superservice-international.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/creimers/notedown-backend/issues"
+  },
+  "homepage": "https://github.com/creimers/notedown-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
+    "nano": "^6.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.4.2",
+    "nodemon": "^1.11.0"
+  }
+}
