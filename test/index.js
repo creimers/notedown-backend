@@ -27,21 +27,12 @@ describe('AuthBackend', () => {
         })
       })
 
+
+  })
+
+  describe('autheticate user', () => {
+
       it('sould fail for missing data', done => {
-
-        let email = "johannes@paul.com"
-        let password = "duckducksnow"
-
-        chai.request(server)
-        .post('/authenticate')
-        .send({email, password})
-        .end((err, res) => {
-          res.should.have.status(400)
-          done()
-        })
-      })
-
-      it('sould fail for unexisting user', done => {
 
         let email = ""
         let password = "duckducksnow"
@@ -55,6 +46,19 @@ describe('AuthBackend', () => {
         })
       })
 
+      it('sould fail for unexisting user', done => {
+
+        let email = "johannes@paul.fr"
+        let password = "duckducksnow"
+
+        chai.request(server)
+        .post('/authenticate')
+        .send({email, password})
+        .end((err, res) => {
+          res.should.have.status(400)
+          done()
+        })
+      })
   })
 
 })

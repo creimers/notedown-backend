@@ -22,6 +22,7 @@ let db = couch.use('_users')
 // TODO: in couchdb 2.0 the '_users' db will have to be created manually
 
 
+// TODO put in other file
 const queryUser = (email, password) => {
   return new Promise((resolve, reject) => {
     db.auth(email, password, (err, body, headers) => {
@@ -33,13 +34,39 @@ const queryUser = (email, password) => {
   })
 }
 
+const createUser = (email, password) => {
+  return new Promise((resolve, reject) => {
+    let newUser = {
+      name: email,
+      _id: `org.couchdb.user:${email}`,
+      password,
+      type: "user",
+      roles: []
+    }
+    db.insert(newUser, (err, body) => {
+      if (err) {
+        reject(err)
+      }
+      resolve()
+    })
+  })
+}
+
 // register user
 // * save user in db
 // * create db for user
 app.post('/register', (req, res) => {
-  // let { email, password } = req.body
+  let { email, password } = req.body
+  if (!email || !password) {
+    res.status(400).send('email and password required')
+    return
+  }
 
-  res.status(201).send('yes')
+  createUser(email, password)
+    .then(() => res.status(201).send('yes'))
+    .catch(err => res.status(400).send(err.message))
+
+  
 })
 
 app.post('/authenticate', (req, res) => {
@@ -51,7 +78,10 @@ app.post('/authenticate', (req, res) => {
   }
 
   queryUser(email, password)
-    .then(() => res.send('yes yes yes'))
+    .then(() => {
+      // TODO: create JWT
+      res.send('yes yes yes')
+    })
     .catch(err => res.status(400).send(err.message))
     
 
